@@ -100,11 +100,11 @@ ARG BUILD_DIR
 # Clone the RPI kernel repo
 RUN git clone --single-branch --branch $KERNEL_BRANCH $KERNEL_GIT $BUILD_DIR/linux/
 
-# Kernel compile options
-ARG ARCH=arm64
-ARG CROSS_COMPILE=aarch64-linux-gnu-
+# Kernel compile options (changed to 32-bit)
+ARG ARCH=arm
+ARG CROSS_COMPILE=arm-linux-gnueabihf-
 
-# Compile default VM guest image
+# Compile default VM guest image (32-bit)
 RUN make -C $BUILD_DIR/linux defconfig kvm_guest.config \
  && make -C $BUILD_DIR/linux -j$(nproc) Image
 
